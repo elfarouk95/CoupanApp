@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <TextView
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:onClick="skip"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:text="skip" />
+
+        <EditText
+            android:id="@+id/email"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/Phone"
+            android:layout_gravity="center"
+            android:drawableRight="@drawable/mail"
+            android:drawableTint="@color/colorAccent"
+            android:drawableTintMode="multiply"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/Phone"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/Address"
+            android:drawableRight="@drawable/call"
+            android:drawableTint="@color/colorAccent"
+            android:drawableTintMode="multiply"
+            android:hint="Phone"
+            android:inputType="textWebEmailAddress" />
+
+        <EditText
+            android:id="@+id/Address"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/worlwide1"
+            android:drawableTint="@color/colorAccent"
+            android:drawableTintMode="multiply"
+            android:hint="address"
+            android:inputType="textPostalAddress" />
+
+        <Button
+            android:id="@+id/btn"
+            style="@style/EditTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Address"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_xlarge"
+            android:onClick="Goto"
+            android:text="Go To" />
+
+    </RelativeLayout>
+</layout>
