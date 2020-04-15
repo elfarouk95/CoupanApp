@@ -95,7 +95,7 @@ public class Main2Activity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
 
-        final GridLayoutManager layoutManager = new GridLayoutManager(Main2Activity.this, 2);
+        final GridLayoutManager layoutManager = new GridLayoutManager(Main2Activity.this, 1);
         recyclerView.addItemDecoration(new GridMarginDecoration(Main2Activity.this, 2, 2, 2, 2));
         recyclerView.setLayoutManager(layoutManager);
 

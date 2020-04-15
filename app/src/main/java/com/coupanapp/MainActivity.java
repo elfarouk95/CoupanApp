@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             List<Address> addresses = geo.getFromLocation(latitude, longitude, 1);
             if (addresses.isEmpty()) {
                // gpsTracker.showSettingsAlert();
-                return ("Waiting for Location");
+                return ("");
 
             } else {
                 if (addresses.size() > 0) {

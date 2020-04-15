@@ -1,12 +1,16 @@
 package com.coupanapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.coupanapp.R;
@@ -39,7 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_recycler_list, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.newitem, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -51,8 +55,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof ViewHolder) {
             final Model model = getItem(position);
             ViewHolder genericViewHolder = (ViewHolder) holder;
-            Glide.with(mContext).load("http://www.coupons-codes.website/t/" + model.getImgurl()).into(((ViewHolder) holder).imgUser);
+            Glide.with(mContext).load("http://www.coupons-codes.website/t/DashBoard/" + model.getImgurl()).into(((ViewHolder) holder).imgUser);
             ((ViewHolder) holder).itemTxtTitle.setText(model.getCopuntxt());
+            ((ViewHolder) holder).value.setText(model.getvalue());
+            ((ViewHolder) holder).siteUrl.setText(model.getsiteUrl());
 
 
         }
@@ -82,17 +88,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         private ImageView imgUser;
         private TextView itemTxtTitle;
+        private TextView value;
+        private TextView siteUrl;
+        private Button Copy;
+        private ImageView Share;
 
         public ViewHolder(final View itemView) {
             super(itemView);
 
             // ButterKnife.bind(this, itemView);
 
-            this.imgUser = (ImageView) itemView.findViewById(R.id.img_user);
-            this.itemTxtTitle = (TextView) itemView.findViewById(R.id.item_txt_title);
+            this.imgUser = (ImageView) itemView.findViewById(R.id.ImgAds);
+            this.itemTxtTitle = (TextView) itemView.findViewById(R.id.code);
+            this.value = (TextView) itemView.findViewById(R.id.value);
+            this.siteUrl = (TextView) itemView.findViewById(R.id.siteurl);
+            this.Copy = itemView.findViewById(R.id.copy);
+            this.Share = itemView.findViewById(R.id.share);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            Copy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
@@ -101,8 +115,37 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
             });
 
+
+            Share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    gotoWeb(view.getContext(), "https://play.google.com/store/apps/details?id=com.coupanapp");
+                    // mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
+                }
+            });
+
+            siteUrl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    gotoWeb(view.getContext(), modelList.get(getAdapterPosition()).getsiteUrl());
+                    // mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
+                }
+            });
+
+
         }
     }
 
+
+    void gotoWeb(Context c, String url) {
+        try {
+            // String url = "http://www.example.com";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            mContext.startActivity(i);
+        } catch (Exception e) {
+            Toast.makeText(mContext, "", Toast.LENGTH_LONG).show();
+        }
+    }
 }
 

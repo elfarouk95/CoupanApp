@@ -12,6 +12,28 @@ public class Model {
     private String mCopuntxt;
     @SerializedName("imgurl")
     private String mImgurl;
+    @SerializedName("value")
+    private String mvalue;
+    @SerializedName("siteUrl")
+    private String msiteUrl;
+
+    public String getvalue() {
+        return mvalue;
+    }
+
+    public void setvalue(String mvalue) {
+        this.mvalue = mvalue;
+    }
+
+    public String getsiteUrl() {
+        return msiteUrl;
+    }
+
+    public void setsiteUrl(String msiteUrl) {
+        this.msiteUrl = msiteUrl;
+    }
+
+
 
     public String getCopuntxt() {
         return mCopuntxt;
