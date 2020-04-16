@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.coupanapp.R;
 import com.coupanapp.databinding.ActivityMainBinding;
+import com.onesignal.OneSignal;
 
 import java.util.List;
 import java.util.Locale;
@@ -31,7 +32,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         gpsTracker = new GpsTracker(this);
-      //  gpsTracker.showSettingsAlert();
+        //  gpsTracker.showSettingsAlert();
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
         String id = Util.getStringPref("id", "-1", this);
         if (!id.equals("-1")) {
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 binding.Address.setText(getAddress(gpsTracker, MainActivity.this));
             }
-        },1000);
+        }, 1000);
 
     }
 
@@ -83,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             double longitude = gpsTracker.getLongitude();
             List<Address> addresses = geo.getFromLocation(latitude, longitude, 1);
             if (addresses.isEmpty()) {
-               // gpsTracker.showSettingsAlert();
+                // gpsTracker.showSettingsAlert();
                 return ("");
 
             } else {
